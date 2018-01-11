@@ -1,3 +1,73 @@
+## uPython REPL
+
+*REPL stands for Read Evaluate Print Loop* it is an interactive programming environment, many languages offer this way of interfacing with their runtime.
+
+One of the great things of micropython is that it provides a REPL by default on the device you load it on and you can pretty much do everything you need from that REPL, however if you want your work to persist in between boots the REPL is not the right workflow.
+
+Luckily micropython has an internal filesystem where we can upload our code sketches and store them in the device's flash memory along with other non-code files, this will allow us to build our webserver little by little.
+
+## A REPL over the web
+
+Let's use the serial interface to access the board's REPL and enabled the WebREPL feature so that we can use our browser to type in our code instead of the terminal.
+
+```
+import webrepl_setup
+```
+
+
+Since the ESP8266 is a WiFi enabled board that means that is capable of networking out of the box and is capable of acting as a Wifi access point. When you flash the board fresh, you will see that after resetting it will create an access point with name `MicroPython-<something>` where something is the unique ID of the board.
+
+You can connect your computer to that Wifi network and when asked for a password you can enter `micropythoN`, with a capital *N*.
+
+Now that you are connected to the board via Wifi, you can use the webrepl tool, to interface with the little Wemos board.
+
+For more info [Adafruit WebREPL tutorial](https://learn.adafruit.com/micropython-basics-esp8266-webrepl/access-webrepl)
+
+What is cool about having a REPL over the web is that you can program a microcontroller that literally sits on another country.
+
+http://micropython.org/live/
+
+```
+# LCD output
+import pyb
+from pyb import Servo
+
+lcd = pyb.LCD('Y')
+lcd.light(True)
+lcd.write('\n\n  YEAH HAMBURG!\n')
+
+#s1 = Servo(1)
+s2 = Servo(2)
+
+# move to -60 degrees over 1.5 seconds
+# speed up to a speed of 20 over 2 seconds
+s2.speed(20, 1000)
+pyb.delay(1000)
+# speed up to a speed of 20 over 2 seconds
+s2.speed(0)
+```
+
+## How to transfer files to my ESP8266?
+
+The official way is by using the WebREPL file transfer tool: http://docs.micropython.org/en/latest/e ... ive-prompt . File transfers also supported directly by WebREPL HTML client. If WebREPL file transfer doesn't work [well] for you, or you just want to try other options, there're few community-supported alternatives:
+- rshell
+- mpfshell, http://forum.micropython.org/viewtopic.php?f=16&t=1652
+- ampy
+- ESPlorer, http://forum.micropython.org/viewtopic.php?f=16&t=1817 (may support file transfer in future versions)
+
+## micropython documentation
+
+http://docs.micropython.org/en/v1.9.3/esp8266/
+
+## Boards
+
+https://learn.adafruit.com/micropython-basics-what-is-micropython/overview?view=all#faq-9
+
+## IDEs
+
+* [ESPlorer](https://esp8266.ru/esplorer/)
+
+
 ## Materials list
 
 |item|units|url|

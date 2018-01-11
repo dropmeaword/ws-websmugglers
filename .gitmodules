@@ -1,0 +1,12 @@
+[submodule "ext/webrepl"]
+	path = ext/webrepl
+	url = https://github.com/micropython/webrepl.git
+[submodule "ext/rshell"]
+	path = ext/rshell
+	url = https://github.com/dhylands/rshell.git
+[submodule "ext/mpfshell"]
+	path = ext/mpfshell
+	url = https://github.com/wendlers/mpfshell.git
+[submodule "ext/ampy"]
+	path = ext/ampy
+	url = https://github.com/adafruit/ampy.git
