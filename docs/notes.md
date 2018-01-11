@@ -1,3 +1,15 @@
+## Uploading files to the board
+
+`ampy` will allow you to upload files, run scripts and transfer your website to the MCU. To use `ampy` you will have to install it first, like this:
+
+```
+pip install adafruit-ampy
+```
+
+see (ampy tutorial)[https://learn.adafruit.com/micropython-basics-load-files-and-run-code?view=all]
+
+By default the run command will wait for the script to finish running on the board before printing its output.  In some cases you don't want this behavior--for example if your script has a main or infinite loop that never returns you don't want ampy to sit around waiting forever for it to finish.  In this case add the --no-output option to the run command.  This flag tells ampy not to wait for any output and instead just start running the script and return.
+
 ## uPython REPL
 
 *REPL stands for Read Evaluate Print Loop* it is an interactive programming environment, many languages offer this way of interfacing with their runtime.

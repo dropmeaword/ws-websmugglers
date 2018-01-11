@@ -29,6 +29,7 @@ station.scan()
 ```
 
 wrapped:
+
 ```
 import network
  
@@ -52,13 +53,23 @@ def connect():
   print(station.ifconfig())
 ```
 
-Getting network configuration:
+### Getting network configuration:
 
 ```
 ap.ifconfig()
 ```
 
 Will show us our device's IP, netmask, gateway IP and DNS address.
+
+To get the device's MAC address:
+
+```
+import network
+import ubinascii
+mac = ubinascii.hexlify(network.WLAN().config('mac'),':').decode()
+print(mac)
+```
+
 
 
 ## WiFi (mode: AP)
@@ -317,6 +328,23 @@ while True:
 
     # we keep no further information
     # HTTP is a stateless protocol
+```
+
+Send HTTP status codes:
+
+```
+def send_200_ok(conn):
+    conn.sendall('HTTP/1.1 200 OK\n')
+    conn.sendall('Connection: close')
+    conn.sendall('Server: smugglesrv\n')
+    conn.sendall('Content-Type: text/html\n\n')
+
+def send_400_not_found(conn):
+    conn.sendall('HTTP/1.1 404 Not Found\n')
+    conn.sendall('Connection: close')
+    conn.sendall('Server: smugglesrv\n')
+    conn.sendall('Content-Type: text/html\n\n')
+    conn.sendall('<h1>404 - you have entered the void</h1>')
 ```
 
 See: https://httpstat.us/

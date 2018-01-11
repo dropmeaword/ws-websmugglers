@@ -10,3 +10,6 @@
 [submodule "ext/ampy"]
 	path = ext/ampy
 	url = https://github.com/adafruit/ampy.git
+[submodule "ext/picoweb"]
+	path = ext/picoweb
+	url = https://github.com/pfalcon/picoweb.git
