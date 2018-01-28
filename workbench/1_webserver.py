@@ -19,11 +19,11 @@ print("I am listening now...")
 while True:
 	# if an incoming connection arrives, deal with it
 	conn, addr = s.accept()
-	print( "Got a connection from {0}".format(str(addr)) )
+	print( "Got a visitor from {0}".format(str(addr)) )
 
 	# read the contents of the request
 	request = conn.recv(4096)
-	# print the icoming request
+	# print the incoming request
 	request = str(request)
 	print("Our visitor requested this: ")
 	print(request)
@@ -33,7 +33,7 @@ while True:
 	conn.sendall('Server: smugglersrv\n')
 	conn.sendall('Content-Type: text/html\n\n')
 
-	# send back to the browser something to render
+	# after the headers we can send something to render
 	conn.sendall("My name is Janus")
 	conn.sendall("\n")
 
