@@ -10,6 +10,7 @@ PORT=/dev/tty.SLAB_USBtoUART
 SPEED=115200
 ESPTOOL=esptool.py
 FIRMWARE=esp8266-20171101-v1.9.3.bin
+FIRMWARE32=esp32-20180125-v1.9.3-240-ga275cb0f.bin
 
 erase:
 	$(ESPTOOL) --port $(PORT) erase_flash
@@ -24,7 +25,16 @@ flash:
 # this is a micropython limitation, as the ESP SDK
 # seems to support 16Mb flash just fine
 
+	@echo 'Flashing $(FIRMWARE)'
 	$(ESPTOOL) -p  $(PORT) write_flash -fm dio -fs 32m 0 $(FIRMWARE)
+	@echo 'Power device again'
+
+
+flash32:
+# for Wemos LOLIN based on ESP32
+	@echo 'Flashing $(FIRMWARE32)'
+
+	$(ESPTOOL) -p  $(PORT) write_flash --flash_size=detect -fm dio 0 $(FIRMWARE32)
 	@echo 'Power device again'
 
 
