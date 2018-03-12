@@ -1,7 +1,7 @@
 import network
 import picoweb
 
-app = picoweb.WebApp(__name__)
+app = picoweb.WebApp(__name__, webroot="/www")
 
 @app.route('/')
 def index(req, resp):
