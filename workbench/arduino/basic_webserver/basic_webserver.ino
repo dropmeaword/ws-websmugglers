@@ -17,6 +17,30 @@
 
 #define SPIFFS_ALIGNED_OBJECT_INDEX_TABLES 1
 
+bool wifi_create_ap(const char *myssid) {
+  WiFi.mode(WIFI_AP);
+
+  // optional soft ip config
+  LOG("Custom AP IP/GW/Subnet");
+  LOG_NEW_LINE
+  WiFi.softAPConfig(ip_static, gw_static, sn_static);
+
+  WiFi.softAP(myssid);
+  LOG("Creating WiFi access point with name ");
+  LOG(myssid);
+  LOG_NEW_LINE
+
+  // let a long delay happen here, otherwise we might not get an IP
+  delay(1000);
+
+  // setup the DNS server redirecting all the domains to the ap IP
+//  dnsServer.setErrorReplyCode(DNSReplyCode::NoError);
+//  dnsServer.start(DNS_PORT, "*", WiFi.softAPIP());
+
+  Serial.print("AP IP address: ");
+  Serial.println(WiFi.softAPIP());
+}
+
 
 bool wifi_connect_as_client(const char *ssid, const char *passw, int timeouts = 10) {
   boolean succeeded = true;
@@ -58,7 +82,6 @@ bool wifi_connect_as_client(const char *ssid, const char *passw, int timeouts = 
 
 void setup() {
   Serial.begin(115200);
-  //wifi_connect_as_client("CABO_VERDE", "12345678");
 
   Serial.println();
   Serial.println();
